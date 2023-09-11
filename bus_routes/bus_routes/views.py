@@ -7,11 +7,7 @@ COMPANY_COORDINATES = [76.66501949986178, 12.136039536554538]
 @api_view(['POST'])
 def calculate_routes(request):
     # Get the coordinates from the request
-    coordinates = request.data.get('coordinates')
-    
-    # Check if coordinates are provided
-    if not coordinates or not isinstance(coordinates, list):
-        return Response({"error": "Coordinates not provided or invalid format."}, status=400)
+    coordinates = request.data.get('coordinates', [])
 
     routes = []
     for i in range(0, len(coordinates), BUS_CAPACITY):
